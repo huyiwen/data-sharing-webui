@@ -3,7 +3,7 @@ const rows = [
     "ServiceName",
     "ServiceID",
     "PublisherURL",
-    "PublisherMSPID",
+    "Publisher",
     "Comment",
     "Table",
     "Application",
@@ -43,7 +43,7 @@ function approveOnClick(row) {
         ServiceName: cells[rows.indexOf("ServiceName")].textContent,
         ServiceID: cells[rows.indexOf("ServiceID")].textContent,
         PublisherURL: cells[rows.indexOf("PublisherURL")].textContent,
-        PublisherMSPID: cells[rows.indexOf("PublisherMSPID")].textContent,
+        Publisher: cells[rows.indexOf("Publisher")].textContent,
         Comment: cells[rows.indexOf("Comment")].textContent,
         Table: cells[rows.indexOf("Table")].textContent,
     };
@@ -91,7 +91,7 @@ function dataOnClick(service) {
     })
 }
 
-// ServiceName, ServiceID, PublisherURL, PublisherMSPID, Comment, Table, Approved, NoAccess
+// ServiceName, ServiceID, PublisherURL, Publisher, Comment, Table, Approved, NoAccess
 function addServiceRow(service, tableBody) {
     const row = tableBody.insertRow();
     console.log("addServiceRow:", service)
@@ -99,7 +99,7 @@ function addServiceRow(service, tableBody) {
     row.insertCell(rows.indexOf("ServiceName")).textContent = service.ServiceName;
     row.insertCell(rows.indexOf("ServiceID")).textContent = service.ServiceID;
     row.insertCell(rows.indexOf("PublisherURL")).textContent = service.PublisherURL;
-    row.insertCell(rows.indexOf("PublisherMSPID")).textContent = service.PublisherMSPID;
+    row.insertCell(rows.indexOf("Publisher")).textContent = service.Publisher;
     row.insertCell(rows.indexOf("Comment")).textContent = service.Comment;
     row.insertCell(rows.indexOf("Table")).textContent = service.Table;
 
@@ -340,7 +340,7 @@ addServiceForm.addEventListener("submit", async function (event) {
                 result.Table,
             );
             requestData.approved = false;
-            requestData.Table = result.Table;
+            requestData.Table = result.Table ? result.Table : "数据库未配置";
             requestData.serviceID = result.serviceID;
             appendNewServiceRow(requestData);
         } else {
