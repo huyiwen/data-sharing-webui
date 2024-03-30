@@ -1,10 +1,9 @@
-// BASE_URL = "http://localhost:5000";// defined in index.html with variable port
 
 document.addEventListener("DOMContentLoaded", function () {
   // 使用XMLHttpRequest来进行POST请求
   var xhr = new XMLHttpRequest();
   // xhr.open('POST', '/get_services', true);
-  xhr.open("GET", BASE_URL + "/get_services", true);
+  xhr.open("GET", "/get_services", true);
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
   // 当接收到响应时的操作
@@ -104,12 +103,12 @@ function addServiceRow(service, tableBody) {
   viewBtn.textContent = "View";
   viewBtn.className = "button-style";
   viewBtn.onclick = function () {
-    // fetch_data 
+    // fetch_data
     const data = {
       ServiceID : service.ServiceID,
       PublisherURL: service.PublisherURL
     }
-    fetch(BASE_URL + "/fetch_data", {
+    fetch("/fetch_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -191,7 +190,7 @@ function displayDataModal(responseData) {
   modalContent.appendChild(closeBtn);
 
   console.log("data:", (responseData))
- 
+
   const resdata = JSON.parse(responseData.data)
   table = createTable(resdata);
 
@@ -232,7 +231,7 @@ function appendNewServiceRow(newService) {
 //   };
 
 //   // 发送POST请求
-//   fetch(BASE_URL + "/approve_application", {
+//   fetch("/approve_application", {
 //     method: "POST",
 //     headers: {
 //       "Content-Type": "application/json",
@@ -332,7 +331,7 @@ addServiceForm.addEventListener("submit", async function (event) {
 
   try {
     // 向put_service端点发送POST请求
-    const response = await fetch(BASE_URL + "/put_service", {
+    const response = await fetch("/put_service", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 使用XMLHttpRequest来进行POST请求
   var xhr = new XMLHttpRequest();
-  console.log("BASE_URL:",BASE_URL)
-  xhr.open("GET", BASE_URL + "/get_sendOut", true);
+  xhr.open("GET", "/get_sendOut", true);
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
   // 当接收到响应时的操作
@@ -58,12 +57,12 @@ function addApplicationRow(application, tableBody) {
   viewBtn.textContent = "ViewData";
   // approveBtn.setAttribute("data-service-id", application.ServiceID);
   viewBtn.onclick = function () {
-      // fetch_data 
+      // fetch_data
       const data = {
         ServiceID : application.ServiceID,
         PublisherURL: application.PublisherURL
       }
-      fetch(BASE_URL + "/fetch_data", {
+      fetch("/fetch_data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -164,7 +163,7 @@ function displayDataModal(responseData) {
   modalContent.appendChild(closeBtn);
 
   console.log("data:", (responseData))
- 
+
   const resdata = JSON.parse(responseData.data)
   table = createTable(resdata);
 

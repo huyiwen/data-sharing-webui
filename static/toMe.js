@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     // 使用XMLHttpRequest来进行POST请求
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", BASE_URL + "/get_toMe", true);
+    xhr.open("GET", "/get_toMe", true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  
+
     // 当接收到响应时的操作
     xhr.onload = function () {
       if (xhr.status === 200) {
@@ -13,18 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Server error:", xhr.status);
       }
     };
-  
+
     xhr.onerror = function () {
       console.error("Request failed", xhr.status);
     };
-  
+
     xhr.send();
   });
 
 function addApplicationRow(application, tableBody) {
     const row = tableBody.insertRow();
     console.log("addApplicationRow:",application);
-  
+
     const rows = [
       "ServiceName",
       "ServiceID",
@@ -33,7 +33,7 @@ function addApplicationRow(application, tableBody) {
       "Status",
       "Operation"
     ];
-  
+
     row.insertCell(rows.indexOf("ServiceName")).textContent = application.ServiceName;
     row.insertCell(rows.indexOf("ServiceID")).textContent = application.ServiceID;
     row.insertCell(rows.indexOf("InitiatorID")).textContent = application.InitiatorID;
@@ -125,7 +125,7 @@ function populateTable(applications) {
     const tableBody = document
       .getElementById("applicationTable")
       .getElementsByTagName("tbody")[0];
-  
+
     applications.forEach((application) => {
       addApplicationRow(application, tableBody);
     });
