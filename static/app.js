@@ -85,7 +85,9 @@ function dataOnClick(service) {
             if (!response.ok) {
                 alert(data.error);
             } else {
-                displayDataModal(data);
+                console.log(data.data);
+                parsedData = JSON.parse(data.data);
+                displayDataModal(parsedData);
             }
         });
     })
@@ -101,7 +103,7 @@ function addServiceRow(service, tableBody) {
     row.insertCell(rows.indexOf("PublisherURL")).textContent = service.PublisherURL;
     row.insertCell(rows.indexOf("Publisher")).textContent = service.Publisher;
     row.insertCell(rows.indexOf("Comment")).textContent = service.Comment;
-    row.insertCell(rows.indexOf("Table")).textContent = service.Table;
+    row.insertCell(rows.indexOf("Table")).textContent = service.Table ? service.Table : "数据库未配置";
 
     // 添加approve按钮
     const approveBtn = document.createElement("button");
